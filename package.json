@@ -2,8 +2,12 @@
   "name": "mensa",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "8.x",
+    "node": "16.x"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
