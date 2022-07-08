@@ -1,44 +1,106 @@
 <template>
-  <div class="dropdown">
-    <a
-      class="btn btn-secondary dropdown-toggle"
-      href="#"
-      role="button"
-      id="dropdownMenuLink"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
-      <img class="hmenu" src="@/assets/icon.png" alt="hmenu" />
-    </a>
+  <div class="block">
+    <div class="dropdown">
+      <a
+        class="btn btn-secondary dropdown-toggle"
+        href="#"
+        role="button"
+        id="dropdownMenuLink"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img class="hmenu" src="@/assets/icon.png" alt="hmenu" />
+        <p class="userName">Willkomen {{ claim.name }}</p>
+      </a>
 
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li>
-        <router-link to="/"><a class="dropdown-item">Home</a></router-link>
-      </li>
-      <li>
-        <router-link to="/"><a class="dropdown-item">Info</a></router-link>
-      </li>
-      <li>
-        <router-link to="/"><a class="dropdown-item">Profile</a></router-link>
-      </li>
-    </ul>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li>
+          <router-link to="/"><a class="dropdown-item">Home</a></router-link>
+        </li>
+        <li>
+          <router-link to="/InfoPage"
+            ><a class="dropdown-item">Mensa Übersicht</a></router-link
+          >
+        </li>
+        <li>
+          <router-link to="/"
+            ><a class="dropdown-item"
+              ><router-link
+                to="/profile"
+                v-if="authState && authState.isAuthenticated"
+                >Protected Profile</router-link
+              ></a
+            ></router-link
+          >
+        </li>
+        <li>
+          <router-link
+            class="dropdown-item"
+            to="/login"
+            v-if="authState && !authState.isAuthenticated"
+            >Login</router-link
+          >
+        </li>
+        <li>
+          <button
+            class="dropdown-item"
+            v-if="authState && authState.isAuthenticated"
+            v-on:click="logout()"
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="block"></div>
 </template>
 
 <script>
 export default {
   name: "ProfileHeader",
+  data() {
+    return {
+      claims: [],
+      claim: "",
+    };
+  },
+  async created() {
+    this.claims = await Object.entries(await this.$auth.getUser()).map(
+      (entry) => ({ claim: entry[0], value: entry[1] })
+    );
+    this.claim = await this.$auth.getUser();
+  },
+  methods: {
+    async logout() {
+      await this.$auth.signOut();
+    },
+  },
 };
 </script>
 
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  .userName {
+    color: black;
+    position: absolute;
+    left: 60px;
+    top: 2px;
+  }
+  .dropdown-toggle::after {
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+    display: none;
+  }
   .hmenu {
+    z-index: 5;
+    margin-top: -4px;
     margin-left: -8px;
-    margin-top: -3px;
-    z-index: 3;
     height: 30px;
     width: 30px;
   }
@@ -48,13 +110,14 @@ export default {
     background-color: #56973e;
     border-radius: 50px;
     position: absolute;
-    top: -3px;
+    top: 3px;
     left: 5%;
     width: 40px;
     height: 37px;
+    z-index: 8;
   }
   .dropdown {
-    z-index: 5;
+    z-index: 1;
     color: #56973e;
   }
 

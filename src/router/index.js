@@ -1,8 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { LoginCallback } from "@okta/okta-vue";
 import StartPage from "@/views/StartPage.vue";
 import HomePage from "@/views/HomePage.vue";
 import InfoPage from "@/views/InfoPage.vue";
+import ProfileComponent from "@/views/ProfilePage.vue";
+import Login from "@/views/LogIn.vue";
+
 const routes = [
+  {
+    path: "/login",
+    component: Login,
+  },
+  {
+    path: "/login/callback",
+    component: LoginCallback,
+  },
+  {
+    path: "/profile",
+    component: ProfileComponent,
+    meta: {
+      requiresAuth: true,
+    },
+  },
   {
     path: "/",
     name: "StartPage",
@@ -31,6 +50,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  linkActiveClass: "A",
   routes,
 });
 

@@ -1,39 +1,78 @@
 <template>
-  <div class="Structure">
-    <router-link to="/HomePage">
-      <button class="weiter">Weiter</button>
-    </router-link>
+  <Keep-alive>
+    <div class="Structure">
+      <router-link to="/HomePage">
+        <router-link to="/login" v-if="authState && !authState.isAuthenticated"
+          ><button class="weiter">Weiter</button></router-link
+        >
+      </router-link>
+      <router-link to="/Homepage" v-if="authState && authState.isAuthenticated"
+        ><button class="weiter">Weiter</button></router-link
+      >
 
-    <div class="mensaback">
-      <div class="htw">hi</div>
-      <div class="htwback"></div>
-      <img class="backgroundLayout" src="@/assets/pngwing.com.png" alt="logo" />
-      <div>
-        <img class="logoh" src="@/assets/HTW.png" alt="logo" />
+      <div class="mensaback">
+        <div class="htw">hi</div>
+        <div class="htwback"></div>
+        <img
+          class="backgroundLayout"
+          src="@/assets/pngwing.com.png"
+          alt="logo"
+        />
+        <div>
+          <img class="logoh" src="@/assets/HTW.png" alt="logo" />
 
-        <span class="dot"></span>
-        <div class="subtitle">Unirest Platform</div>
-        <div class="description">
-          Unsere Mensen bieten werktags frisch zubereitete Speisen, einen
-          Aktionsstand sowie belegte Brötchen, Kuchen, Kalt- und Heißgetränke am
-          Backshop. Schaut doch einfach mal rein!
+          <span class="dot"></span>
+          <div class="subtitle">Unirest Platform</div>
+          <div class="description">
+            Unsere Mensen bieten werktags frisch zubereitete Speisen, einen
+            Aktionsstand sowie belegte Brötchen, Kuchen, Kalt- und Heißgetränke
+            am Backshop. Schaut doch einfach mal rein! :
+          </div>
         </div>
+        <div class="appintro">Die Mensen Platform</div>
       </div>
-      <div class="appintro">Die Mensen Platform</div>
     </div>
-  </div>
+  </Keep-alive>
 </template>
 
 <script>
+import Localbase from "localbase";
+
+let db = new Localbase("db");
 export default {
   name: "StartPage",
   data: function () {
     return {
       claims: "",
+      mensa: [],
     };
   },
   created() {
     this.setup();
+  },
+  async mounted() {
+    if (this.mensa === null) {
+      const can = fetch("https://openmensa.org/api/v2/canteens?page=1")
+        .then((res) => res.json())
+        .then((mensa) => (this.mensa = mensa))
+        .catch((err) => console.log(err.message()));
+      /*add canteens to the Database */
+      db.collection("canteens").add(can);
+
+      const can2 = fetch("https://openmensa.org/api/v2/canteens?page=2")
+        .then((res) => res.json())
+        .then((mensa) => (this.mensa = mensa))
+        .catch((err) => console.log(err.message()));
+      /*add canteens to the Database */
+      db.collection("canteens").add(can2);
+
+      const can3 = fetch("https://openmensa.org/api/v2/canteens?page=3")
+        .then((res) => res.json())
+        .then((mensa) => (this.mensa = mensa))
+        .catch((err) => console.log(err.message()));
+      /*add canteens to the Database */
+      db.collection("canteens").add(can3);
+    }
   },
   methods: {
     async setup() {

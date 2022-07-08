@@ -1,313 +1,273 @@
 <template>
-  <div class="mensainfo">
-    <p class="t">Mensa :</p>
-    <p class="h">{{ mensa.name }}</p>
-    <p class="h">{{ mensa.city }}</p>
-    <p class="h">{{ mensa.address }}</p>
-  </div>
+  <Keep-alive>
+    <div class="mensainfo">
+      <p class="t">Mensa :</p>
+      <p class="h">{{ gmensa.name }}</p>
+      <p class="h">{{ gmensa.city }}</p>
+      <p class="h">{{ gmensa.address }}</p>
+    </div>
 
-  <div class="element">
-    <p class="weeklymeal">Speiseplan der Woche :</p>
-    <div class="Hlayout">
-      <button class="Mon" @click="mealOfDay('5')">Montag</button>
-      <button class="dien" @click="mealOfDay('6')">Dienstag</button>
-      <button class="Mittw" @click="mealOfDay('7')">Mittwoch</button>
+    <div class="element">
+      <p class="weeklymeal">Speiseplan der Woche :</p>
+      <div class="Hlayout">
+        <button class="Mon" @click="mealOfDay('5')">Montag</button>
+        <button class="dien" @click="mealOfDay('6')">Dienstag</button>
+        <button class="Mittw" @click="mealOfDay('7')">Mittwoch</button>
+      </div>
+      <div class="H2layout">
+        <button class="Donner" @click="mealOfDay('8')">Donnerstag</button>
+        <button class="Frei" @click="mealOfDay('9')">Freitag</button>
+        <button class="Sams" @click="mealOfDay('1')">Samstag</button>
+      </div>
+      <div class="text">Den Tag besondere Rezepte :</div>
     </div>
-    <div class="H2layout">
-      <button class="Donner" @click="mealOfDay('8')">Donnerstag</button>
-      <button class="Frei" @click="mealOfDay('9')">Freitag</button>
-      <button class="Sams" @click="mealOfDay('1')">Samstag</button>
+    <div>
+      <div class="dropdown">
+        <a
+          class="btn btn-secondary dropdown-toggle"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Mensa Auswahl
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li
+            class="list-group-item"
+            v-for="men in mensa"
+            :key="men.id"
+            @click="mensaId(men.id)"
+          >
+            <div class="list-group-item1">{{ men.name }}</div>
+          </li>
+        </ul>
+      </div>
+      <img class="platz" src="@/assets/ra.png" alt="platz" />
     </div>
-    <div class="text">Den Tag besondere Rezepte :</div>
-  </div>
-  <div>
-    <div class="dropdown">
-      <a
-        class="btn btn-secondary dropdown-toggle"
-        href="#"
-        role="button"
-        id="dropdownMenuLink"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
+    <li class="list-group-item" v-for="meal in meals" :key="meal.id">
+      <p class="mealname">{{ meal.name }}</p>
+      <p class="price">Preis : {{ meal.prices.students }}€</p>
+      <button
+        class="bb btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasScrolling"
+        aria-controls="offcanvasScrolling"
       >
-        Mensa Auswahl
-      </a>
+        Bewerten
+      </button>
+      <button
+        class="br btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight"
+        style="float: right"
+      >
+        Rezepte
+      </button>
+      <img class="mpic" src="@/assets/Vfood.jpg" alt="MealPicture" />
+      <button
+        class="like"
+        @click="
+          liked(meal.id, meal.name, meal.notes, meal.prices, meal.category)
+        "
+      >
+        like
+      </button>
+    </li>
+    <div class="sblock"></div>
+    <div class="el">
+      <div
+        class="offcanvas offcanvas-start"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
+        tabindex="-1"
+        id="offcanvasScrolling"
+        aria-labelledby="offcanvasScrollingLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="Structure">
+            <router-link to="/HomePage">
+              <button class="weiter">Eingeben</button>
+            </router-link>
 
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li>
-          <a class="dropdown-item" @click="mensaId('18')">
-            Cafeteria FU Wirtschaftswissenschaften
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('19')">
-            Mensa Beuth Hochschule für Technik Kurfürstenstraße
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('20')">
-            Backshop FU Rechtswissenschaft
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('21')">
-            Mensa FU Pharmazie
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('21')">
-            Mensa FU Pharmazie
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('22')"
-            >Mensa Charité Zahnklinik</a
-          >
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('23')">
-            Cafeteria TU Ernst-Reuter-Platz</a
-          >
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('24')">
-            Mensa HTW Wilhelminenhof
-          </a>
-        </li>
-        <li>
-          <button class="dropdown-item" @click="mensaId('25')">
-            Mensa ASH Berlin Hellersdorf
-          </button>
-        </li>
-        <li>
-          <button class="dropdown-item" @click="mensaId('26')">
-            Cafeteria FU Otto-Suhr-Institut
-          </button>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('27')">
-            Mensa FU II Otto-von-Simson-Straße
-          </a>
-        </li>
-        <li>
-          <button class="dropdown-item" @click="mensaId('28')">
-            Mensa FU Veggie
-          </button>
-        </li>
-        <li>
-          <button class="dropdown-item" @click="mensaId('29')">
-            Mensa FU Veggie
-          </button>
-        </li>
-        <li>
-          <a class="dropdown-item" @click="mensaId('30')">
-            Mensa HTW Treskowallee
-          </a>
-        </li>
-      </ul>
-    </div>
-    <img class="platz" src="@/assets/ra.png" alt="platz" />
-  </div>
-  <li class="list-group-item" v-for="meal in meals" :key="meal.id">
-    <p class="mealname">{{ meal.name }}</p>
-    <p class="price">Preis : {{ meal.prices.students }}€</p>
-    <button
-      class="bb btn-primary"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasScrolling"
-      aria-controls="offcanvasScrolling"
-    >
-      Bewerten
-    </button>
-    <button
-      class="br btn-primary"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasRight"
-      aria-controls="offcanvasRight"
-      style="float: right"
-    >
-      Rezepte
-    </button>
-    <img class="mpic" src="@/assets/Vfood.jpg" alt="MealPicture" />
-  </li>
-  <div class="sblock"></div>
-  <div class="el">
-    <div
-      class="offcanvas offcanvas-start"
-      data-bs-scroll="true"
-      data-bs-backdrop="false"
-      tabindex="-1"
-      id="offcanvasScrolling"
-      aria-labelledby="offcanvasScrollingLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="Structure">
-          <router-link to="/HomePage">
-            <button class="weiter">Eingeben</button>
-          </router-link>
+            <div class="mensaback">
+              <div class="htw">hi</div>
+              <div class="htwback"></div>
+              <img
+                class="backgroundLayout"
+                src="@/assets/pngwing.com.png"
+                alt="logo"
+              />
+              <div>
+                <img class="logoh" src="@/assets/Vfood.jpg" alt="meal" />
 
-          <div class="mensaback">
-            <div class="htw">hi</div>
-            <div class="htwback"></div>
-            <img
-              class="backgroundLayout"
-              src="@/assets/pngwing.com.png"
-              alt="logo"
-            />
-            <div>
-              <img class="logoh" src="@/assets/Vfood.jpg" alt="meal" />
-
-              <span class="dot"></span>
-              <div class="subtitle">Meal Example</div>
-              <div class="description">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-star"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-star"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-star"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-star"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
-                  />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-star"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
-                  />
-                </svg>
+                <span class="dot"></span>
+                <div class="subtitle"></div>
+                <div class="description">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-star"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-star"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-star"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-star"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+                    />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-star"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
+                    />
+                  </svg>
+                </div>
               </div>
+              <div class="appintro">Bewerten :</div>
             </div>
-            <div class="appintro">Bewerten :</div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+        v-for="meal in meals"
+        :key="meal.id"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="Structure">
+            <router-link to="/HomePage">
+              <button class="weiter">Home</button>
+            </router-link>
+
+            <div class="mensaback">
+              <div class="htw">hi</div>
+              <div class="htwback"></div>
+              <img
+                class="backgroundLayout"
+                src="@/assets/pngwing.com.png"
+                alt="logo"
+              />
+              <div>
+                <img class="logoh" src="@/assets/Vfood.jpg" alt="meal" />
+
+                <span class="dot"></span>
+                <div class="subtitle">Gericht Komponente</div>
+                <div class="description">{{ meal.category }}</div>
+                <div class="description1">{{ meal.notes }}</div>
+              </div>
+              <div class="appintro">Rezepte :</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div
-      class="offcanvas offcanvas-end"
-      tabindex="-1"
-      id="offcanvasRight"
-      aria-labelledby="offcanvasRightLabel"
-      v-for="meal in meals"
-      :key="meal.id"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel"></h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="Structure">
-          <router-link to="/HomePage">
-            <button class="weiter">Home</button>
-          </router-link>
-
-          <div class="mensaback">
-            <div class="htw">hi</div>
-            <div class="htwback"></div>
-            <img
-              class="backgroundLayout"
-              src="@/assets/pngwing.com.png"
-              alt="logo"
-            />
-            <div>
-              <img class="logoh" src="@/assets/Vfood.jpg" alt="meal" />
-
-              <span class="dot"></span>
-              <div class="subtitle">Meal Example</div>
-              <div class="description">{{ meal.notes }}</div>
-            </div>
-            <div class="appintro">Rezepte :</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </Keep-alive>
 </template>
 
 <script>
+import Localbase from "localbase";
+
+let db = new Localbase("db");
+
 export default {
   name: "MealIngredients",
   data() {
     return {
       mensa: [],
+      gmensa: [],
       mid: "1",
       meals: [],
       day: "1",
+      like: [],
     };
   },
   methods: {
+    liked(ide, name, n, p, c) {
+      this.like.push(ide, name, n, p, c);
+      db.collection("meals").add(this.like);
+    },
     mensaId(id) {
-      this.mensa = null;
-      this.mensa = [];
+      this.gmensa = null;
+      this.gmensa = [];
       this.meals = null;
       this.meals = [];
+      console.log(typeof id);
       this.mid = id;
       console.log(this.mid);
-      fetch(
+      var MealsDay = fetch(
         "https://openmensa.org/api/v2/canteens/" +
           this.mid +
-          "/days/2018-10-1" +
+          "/days/2021-11-1" +
           this.day +
           "/meals"
       )
@@ -318,25 +278,23 @@ export default {
           })
         )
         .catch((err) => console.log(err.message()));
+      console.log("Meals of the day are fetched:" + MealsDay);
 
-      const men = fetch(
-        "https://openmensa.org/api/v2/canteens/" + this.mid + "/"
-      )
+      fetch("https://openmensa.org/api/v2/canteens/" + this.mid + "/")
         .then((res) => res.json())
-        .then((mensa) => (this.mensa = mensa))
+        .then((mensa) => (this.gmensa = mensa))
         .catch((err) => console.log(err.message()));
-      console.log(men);
     },
     mealOfDay(day) {
-      this.mensa = null;
-      this.mensa = [];
+      this.gmensa = null;
+      this.gmensa = [];
       this.meals = null;
       this.meals = [];
       this.day = day;
       fetch(
         "https://openmensa.org/api/v2/canteens/" +
           this.mid +
-          "/days/2018-10-1" +
+          "/days/2021-11-1" +
           this.day +
           "/meals"
       )
@@ -352,16 +310,16 @@ export default {
         "https://openmensa.org/api/v2/canteens/" + this.mid + "/"
       )
         .then((res) => res.json())
-        .then((mensa) => (this.mensa = mensa))
+        .then((mensa) => (this.gmensa = mensa))
         .catch((err) => console.log(err.message()));
       console.log(can);
     },
   },
-  mounted() {
+  async mounted() {
     fetch(
       "https://openmensa.org/api/v2/canteens/" +
         this.mid +
-        "/days/2017-10-12/meals"
+        "/days/2021-11-1/meals"
     )
       .then((res) => res.json())
       .then((data) =>
@@ -373,9 +331,19 @@ export default {
 
     const can = fetch("https://openmensa.org/api/v2/canteens/" + this.mid + "/")
       .then((res) => res.json())
-      .then((mensa) => (this.mensa = mensa))
+      .then((mensa) => (this.gmensa = mensa))
       .catch((err) => console.log(err.message()));
+
     console.log(can);
+
+    var rk = await db
+      .collection("canteens")
+      .get()
+      .then((canteenss) => {
+        return canteenss[0];
+      });
+    this.mensa = rk;
+    console.log(rk);
   },
 };
 </script>
@@ -383,6 +351,24 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  .like {
+    z-index: 4;
+    -webkit-box-align: start;
+    margin: 0px 1px 10px 3px;
+    top: 90px;
+    padding: 0.1rem 1rem;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    color: White;
+    transition-duration: 0.4s;
+    background-color: #56973e;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
+    align-items: start;
+    justify-content: center;
+  }
   .t {
     font-weight: 300;
     font-family: "Roboto", sans-serif;
@@ -400,7 +386,6 @@ export default {
     top: 70px;
     left: 19px;
     font-size: 12px;
-    background-color: rgba(255, 255, 255, 0.7);
     backface-visibility: revert;
     font-weight: 600;
     border-radius: 5px;
@@ -628,6 +613,7 @@ export default {
     width: 90%;
     margin: 5%;
     top: 56%;
+    padding: 10px;
     border-radius: 10px;
     background: rgba(145, 255, 5, 0.34);
     box-shadow: 3px 3px 3px rgba(163, 177, 198, 0.3),
@@ -745,7 +731,6 @@ export default {
     border-color: white;
   }
   .br {
-    margin: 0 0.1rem;
     padding: 0.1rem 1rem;
     font-family: "Roboto", sans-serif;
     cursor: pointer;
@@ -768,7 +753,8 @@ export default {
   .bb {
     -webkit-box-align: start;
     top: 90px;
-    margin-left: -20px;
+    margin-left: -10px;
+    margin-right: 6px;
     padding: 0.1rem 1rem;
     font-family: "Roboto", sans-serif;
     cursor: pointer;
@@ -812,6 +798,16 @@ export default {
       -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     border-color: white;
+  }
+  .list-group-item1 {
+    width: 90%;
+    margin: 1%;
+    align-content: space-between;
+    text-align: center;
+    margin-right: 2px;
+    top: 56%;
+    border-radius: 10px;
+    text-shadow: 1px 6px 6px lightgreen;
   }
 }
 
@@ -860,7 +856,7 @@ export default {
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
-    width: 200px;
+    width: 300px;
     height: 114px;
     left: 15px;
     top: 360px;
@@ -888,7 +884,6 @@ export default {
     height: 214px;
     left: 35px;
     top: 430px;
-
     font-family: "Fira Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -899,6 +894,23 @@ export default {
 
     color: #000000;
   }
+  .description1 {
+    position: absolute;
+    width: 240px;
+    height: 214px;
+    left: 35px;
+    top: 460px;
+    font-family: "Fira Sans", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.0969px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.597208px;
+
+    color: #000000;
+  }
+
   .dot {
     position: fixed;
     align-content: center;
@@ -999,7 +1011,7 @@ export default {
   }
   .mensainfo {
     font-family: "Roboto", sans-serif;
-    z-index: 1;
+    z-index: 2;
     text-align: left;
     margin-left: 5px;
     height: 85px;
@@ -1009,7 +1021,6 @@ export default {
     top: 65px;
     left: 19px;
     font-size: 12px;
-    background-color: rgba(255, 255, 255, 0.7);
     backface-visibility: revert;
     font-weight: 600;
     border-radius: 5px;
@@ -1237,6 +1248,7 @@ export default {
     width: 100%;
     margin: 5%;
     top: 56%;
+    padding: 10px;
     border-radius: 10px;
     background: rgba(145, 255, 5, 0.34);
     box-shadow: 3px 3px 3px rgba(163, 177, 198, 0.3),
@@ -1257,7 +1269,7 @@ export default {
     top: 10px;
     filter: drop-shadow(-13px 0.97px 20px rgba(51, 160, 0, 0.41));
     border-radius: 15px;
-    box-shadow: 3px 3px 3px rgba(163, 177, 198, 0.3),
+    box-shadow: 3px 3px 3px rgba(163, 177, 198, 0.6),
       2px 2px 2px rgba(122, 194, 80, 0.3);
   }
   .block {
@@ -1469,9 +1481,9 @@ export default {
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
-    width: 200px;
+    width: 300px;
     height: 114px;
-    left: 15px;
+    left: 10px;
     top: 360px;
     font-family: "Fira Sans", sans-serif;
     font-style: normal;
@@ -1609,7 +1621,6 @@ export default {
     top: 65px;
     left: 19px;
     font-size: 12px;
-    background-color: rgba(255, 255, 255, 0.7);
     backface-visibility: revert;
     font-weight: 600;
     border-radius: 5px;

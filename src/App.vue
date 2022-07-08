@@ -1,10 +1,25 @@
 <template>
+  <profile-header></profile-header>
+
   <nav class="mainnav">
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
 </template>
+
+<script>
+import ProfileHeader from "@/components/ProfileHeader";
+export default {
+  name: "app",
+  components: { ProfileHeader },
+  methods: {
+    async logout() {
+      await this.$auth.signOut();
+    },
+  },
+};
+</script>
 
 <style>
 .mainnav {

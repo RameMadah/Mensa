@@ -1,59 +1,51 @@
 <template>
-  <p class="jara">
-    {{ canteen.name }}
-  </p>
-  <div class="Structure">
-    <router-link to="/HomePage">
-      <button class="weiter">Zurück</button>
-    </router-link>
-
-    <div class="mensaback">
-      <div class="htwback"></div>
-      <img class="backgroundLayout" src="@/assets/pngwing.com.png" alt="logo" />
-      <div>
+  <Keep-alive>
+    <div class="Structure">
+      <router-link to="/HomePage">
+        <button class="weiter">Zurück</button>
+      </router-link>
+      <div class="mensaback">
+        <div class="htwback"></div>
+        <img
+          class="backgroundLayout"
+          src="@/assets/pngwing.com.png"
+          alt="logo"
+        />
         <img class="logoh" src="@/assets/HTW.png" alt="logo" />
-        <span class="dot"></span>
-        <div class="subtitle">
-          Information über Die Mensa am HTW Treskowaalle
-        </div>
-        <div class="row1">Addresse</div>
-        <div class="description">
-          Treskowallee 8 10318 Berlin (Bezirk: Lichtenberg)
-        </div>
-        <div class="row2">Email</div>
-        <div class="description2">mensen@stw.berlin</div>
-        <div class="row3">Anrufen</div>
-        <div class="description3">030 93939 - 7550</div>
-        <div class="row4">Öffnungszeiten</div>
-        <div class="description4">
-          Mo. – Fr. 08:00 – 14:30 Uhr Mittagstisch 11 - 14:30 Uhr
-        </div>
+        <div class="appintro">Mensen Übersicht</div>
       </div>
-      <div class="appintro">Standort</div>
+      <div class="sicht" v-for="canti in canteen" :key="canti.id">
+        <div class="space"></div>
+        <a>{{ canti.name }}<br /></a>
+        <a>{{ canti.city }}<br /></a>
+        <a>{{ canti.address }}<br /></a>
+        <a>{{ canti.coordinates }}</a>
+        <div class="space"></div>
+      </div>
     </div>
-  </div>
+  </Keep-alive>
 </template>
 
 <script>
+import Localbase from "localbase";
+let db = new Localbase("db");
+
 export default {
   name: "InfoPage",
   data() {
     return {
       canteen: [],
-      mid: "5",
     };
   },
   methods: {},
-  mounted() {
-    console.log("fetching...");
-    const can = fetch("https://openmensa.org/api/v2/canteens/" + this.mid + "/")
-      .then((res) => res.json())
-
-      .then((canteen) => (this.canteen = canteen))
-
-      .catch((err) => console.log(err.message()));
-
-    console.log(can);
+  async mounted() {
+    var rk = await db
+      .collection("canteens")
+      .get()
+      .then((canteenss) => {
+        return canteenss[0];
+      });
+    this.canteen = rk;
   },
 };
 </script>
@@ -61,6 +53,14 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  .space {
+    height: 3px;
+    background-color: #56973e;
+  }
+  .sicht {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+  }
   #Startpage {
     width: 320px;
     height: 620px;
@@ -152,14 +152,14 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px 10px;
+    padding: 3px 3px;
     color: #ffffff;
     font-size: 18px;
     position: absolute;
-    width: 50%;
-    height: 7%;
-    left: 25%;
-    top: 550px;
+    width: 25%;
+    height: 6%;
+    left: 37%;
+    top: 280px;
     z-index: 1;
     background: #56973e;
     border-radius: 80px;
@@ -261,18 +261,17 @@ export default {
   }
 
   .appintro {
-    /* Die Mensa App */
+    /* Mensa übersicht */
     position: absolute;
-    width: 150px;
-    height: 77px;
-    left: 28%;
+    width: 200px;
+    height: 27px;
+    left: 18%;
     top: 220px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 29.0969px;
+    font-size: 20.0969px;
     line-height: 77px;
-    /* identical to box height */
     text-align: center;
     letter-spacing: -0.597208px;
     color: #ffffff;
@@ -340,7 +339,7 @@ export default {
     width: 50%;
     height: 7%;
     left: 25%;
-    top: 550px;
+    top: 50px;
     z-index: 1;
     background: #56973e;
     border-color: #ffffff;
