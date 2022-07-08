@@ -45,13 +45,13 @@ export default {
     );
   },
   async mounted() {
-    var rk = await db
+    var lk = await db
       .collection("meals")
       .get()
-      .then((meals) => {
-        return meals;
+      .then((like) => {
+        return like;
       });
-    this.likes = rk;
+    this.likes = lk;
   },
 };
 </script>

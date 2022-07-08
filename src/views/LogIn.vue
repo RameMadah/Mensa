@@ -1,9 +1,7 @@
 <template>
-  <Keep-alive>
-    <div class="login">
-      <div id="okta-signin-container"></div>
-    </div>
-  </Keep-alive>
+  <div class="login">
+    <div id="okta-signin-container"></div>
+  </div>
 </template>
 
 <script>

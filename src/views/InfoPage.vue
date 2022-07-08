@@ -1,29 +1,22 @@
 <template>
-  <Keep-alive>
-    <div class="Structure">
-      <router-link to="/HomePage">
-        <button class="weiter">Zurück</button>
-      </router-link>
-      <div class="mensaback">
-        <div class="htwback"></div>
-        <img
-          class="backgroundLayout"
-          src="@/assets/pngwing.com.png"
-          alt="logo"
-        />
-        <img class="logoh" src="@/assets/HTW.png" alt="logo" />
-        <div class="appintro">Mensen Übersicht</div>
-      </div>
-      <div class="sicht" v-for="canti in canteen" :key="canti.id">
-        <div class="space"></div>
-        <a>{{ canti.name }}<br /></a>
-        <a>{{ canti.city }}<br /></a>
-        <a>{{ canti.address }}<br /></a>
-        <a>{{ canti.coordinates }}</a>
-        <div class="space"></div>
-      </div>
+  <div class="Structure">
+    <router-link to="/HomePage">
+      <button class="weiter">Zurück</button>
+    </router-link>
+    <div class="mensaback">
+      <div class="htwback"></div>
+      <img class="backgroundLayout" src="@/assets/pngwing.com.png" alt="logo" />
+      <img class="logoh" src="@/assets/HTW.png" alt="logo" />
+      <div class="appintro">Mensen Übersicht</div>
     </div>
-  </Keep-alive>
+    <div class="sicht" v-for="canti in canteen" :key="canti.id">
+      <a>{{ canti.name }}<br /></a>
+      <a>{{ canti.city }}<br /></a>
+      <a>{{ canti.address }}<br /></a>
+      <a>{{ canti.coordinates }}</a>
+      <div class="space"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,11 +48,22 @@ export default {
 @media screen and (max-width: 320px) {
   .space {
     height: 3px;
-    background-color: #56973e;
+    width: 100%;
+    margin-top: 10px;
+    padding-bottom: 6px;
+    background-color: chartreuse;
+    box-shadow: 1px -2px 4px darkslategrey !important;
+    border-radius: 522222px;
   }
   .sicht {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
+    padding: 11px;
+    color: darkslategrey;
+    font-weight: 600;
+    background-color: #4cc355;
+    box-shadow: 22px 0px 3px green;
+    width: 100%;
   }
   #Startpage {
     width: 320px;

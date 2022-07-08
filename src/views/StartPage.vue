@@ -1,38 +1,32 @@
 <template>
-  <Keep-alive>
-    <div class="Structure">
-      <router-link to="/HomePage">
-        <router-link to="/login" v-if="authState && !authState.isAuthenticated"
-          ><button class="weiter">Weiter</button></router-link
-        >
-      </router-link>
-      <router-link to="/Homepage" v-if="authState && authState.isAuthenticated"
+  <div class="Structure">
+    <router-link to="/HomePage">
+      <router-link to="/login" v-if="authState && !authState.isAuthenticated"
         ><button class="weiter">Weiter</button></router-link
       >
+    </router-link>
+    <router-link to="/Homepage" v-if="authState && authState.isAuthenticated"
+      ><button class="weiter">Weiter</button></router-link
+    >
 
-      <div class="mensaback">
-        <div class="htw">hi</div>
-        <div class="htwback"></div>
-        <img
-          class="backgroundLayout"
-          src="@/assets/pngwing.com.png"
-          alt="logo"
-        />
-        <div>
-          <img class="logoh" src="@/assets/HTW.png" alt="logo" />
+    <div class="mensaback">
+      <div class="htw">hi</div>
+      <div class="htwback"></div>
+      <img class="backgroundLayout" src="@/assets/pngwing.com.png" alt="logo" />
+      <div>
+        <img class="logoh" src="@/assets/HTW.png" alt="logo" />
 
-          <span class="dot"></span>
-          <div class="subtitle">Unirest Platform</div>
-          <div class="description">
-            Unsere Mensen bieten werktags frisch zubereitete Speisen, einen
-            Aktionsstand sowie belegte Brötchen, Kuchen, Kalt- und Heißgetränke
-            am Backshop. Schaut doch einfach mal rein! :
-          </div>
+        <span class="dot"></span>
+        <div class="subtitle">Unirest Platform</div>
+        <div class="description">
+          Unsere Mensen bieten werktags frisch zubereitete Speisen, einen
+          Aktionsstand sowie belegte Brötchen, Kuchen, Kalt- und Heißgetränke am
+          Backshop. Schaut doch einfach mal rein! :
         </div>
-        <div class="appintro">Die Mensen Platform</div>
       </div>
+      <div class="appintro">Die Mensen Platform</div>
     </div>
-  </Keep-alive>
+  </div>
 </template>
 
 <script>
@@ -45,13 +39,21 @@ export default {
     return {
       claims: "",
       mensa: [],
+      save: false,
     };
   },
   created() {
     this.setup();
   },
   async mounted() {
-    if (this.mensa === null) {
+    var rk = await db
+      .collection("canteens")
+      .get()
+      .then((canteenss) => {
+        return canteenss[0];
+      });
+    this.mensa = rk;
+    if (this.mensa.length > 2) {
       const can = fetch("https://openmensa.org/api/v2/canteens?page=1")
         .then((res) => res.json())
         .then((mensa) => (this.mensa = mensa))

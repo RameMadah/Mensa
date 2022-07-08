@@ -24,12 +24,13 @@
         </li>
         <li>
           <router-link to="/"
-            ><a class="dropdown-item"
+            ><a
               ><router-link
                 to="/profile"
                 v-if="authState && authState.isAuthenticated"
-                >Protected Profile</router-link
-              ></a
+              >
+                <button class="dropdown-item">profile</button>
+              </router-link></a
             ></router-link
           >
         </li>
@@ -38,7 +39,7 @@
             class="dropdown-item"
             to="/login"
             v-if="authState && !authState.isAuthenticated"
-            >Login</router-link
+            ><button>Login</button></router-link
           >
         </li>
         <li>
