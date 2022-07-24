@@ -10,7 +10,9 @@
         aria-expanded="false"
       >
         <img class="hmenu" src="@/assets/icon.png" alt="hmenu" />
-        <p class="userName">Willkomen {{ claim.name }}</p>
+        <p class="userName" v-if="authState && authState.isAuthenticated">
+          Willkomen {{ claim.name }}
+        </p>
       </a>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">

@@ -59,7 +59,7 @@ export default {
     font-family: "Roboto", sans-serif;
     font-size: 14px;
     padding: 11px;
-    color: darkslategrey;
+    color: cornsilk;
     font-weight: 600;
     background-color: #4cc355;
     box-shadow: 22px 0px 3px green;

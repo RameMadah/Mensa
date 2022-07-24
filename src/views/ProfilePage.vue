@@ -13,13 +13,12 @@
     <table class="ui table">
       <thead>
         <tr>
-          <th>Claim</th>
-          <th>Value</th>
+          <th>Names}</th>
+          <th>prices</th>
         </tr>
         <tr v-for="like in likes" :key="like.id">
-          {{
-            like.name
-          }}
+          <th>{{ like.name }}</th>
+          <th>{{ like.prices }}</th>
         </tr>
       </thead>
       <tbody></tbody>

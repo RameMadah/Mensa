@@ -69,12 +69,7 @@
       Rezepte
     </button>
     <img class="mpic" src="@/assets/Vfood.jpg" alt="MealPicture" />
-    <button
-      class="like"
-      @click="liked(meal.id, meal.name, meal.notes, meal.prices, meal.category)"
-    >
-      like
-    </button>
+    <button class="like" @click="addMeal(meal.id)">like</button>
   </li>
   <div class="sblock"></div>
   <div class="el">
@@ -244,13 +239,30 @@ export default {
       mid: "1",
       meals: [],
       day: "1",
-      like: [],
+      like: "",
+      likes: [],
     };
   },
   methods: {
-    liked(ide, name, n, p, c) {
-      this.like.push(ide, name, n, p, c);
-      db.collection("meals").add(this.like);
+    async addMeal(mealid) {
+      const likedMeal = await fetch(
+        "https://openmensa.org/api/v2/canteens/" +
+          this.mid +
+          "/days/2021-11-1" +
+          this.day +
+          "/meals/" +
+          mealid
+      )
+        .then((res) => res.json())
+        .then((li) => (this.like = li))
+        .catch((err) => console.log(err));
+      this.likes.push(this.like);
+      console.log(likedMeal);
+      db.collection("meals").add(likedMeal);
+    },
+    async saveThis(id) {
+      var likedMeal = await this.meals.find((item) => item.id === id);
+      return likedMeal;
     },
     mensaId(id) {
       this.gmensa = null;
@@ -263,7 +275,8 @@ export default {
       var MealsDay = fetch(
         "https://openmensa.org/api/v2/canteens/" +
           this.mid +
-          "/days/2021-11-1" +
+          "/days/" +
+          "2021-11-1" +
           this.day +
           "/meals"
       )
