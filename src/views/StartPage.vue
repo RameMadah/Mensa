@@ -53,8 +53,8 @@ export default {
         return canteenss[0];
       });
     this.mensa = rk;
-    // check if there is somthing stored in DB
-    if (this.mensa.length() === 0) {
+    // check if there is content stored in DB
+    if (this.mensa === null) {
       const can = fetch("https://openmensa.org/api/v2/canteens?page=1")
         .then((res) => res.json())
         .then((mensa) => (this.mensa = mensa))
