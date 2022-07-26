@@ -360,22 +360,14 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
-  .br:hover {
+  .like:hover {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
       -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
   }
-  .br:active {
-    color: #56973e;
-    background-color: white;
-    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-      -9px -9px 16px rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    border-color: white;
-  }
-  .br:active:focus {
+  .like:active {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
@@ -383,7 +375,15 @@ export default {
     border-radius: 10px;
     border-color: white;
   }
-  .br:focus {
+  .like:active:focus {
+    color: #56973e;
+    background-color: white;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border-color: white;
+  }
+  .like:focus {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),

@@ -54,28 +54,27 @@ export default {
       });
     this.mensa = rk;
     // check if there is content stored in DB
-    if (this.mensa === null) {
-      const can = fetch("https://openmensa.org/api/v2/canteens?page=1")
-        .then((res) => res.json())
-        .then((mensa) => (this.mensa = mensa))
-        .catch((err) => console.log(err.message()));
-      /*add canteens to the Database */
-      db.collection("canteens").add(can);
 
-      const can2 = fetch("https://openmensa.org/api/v2/canteens?page=2")
-        .then((res) => res.json())
-        .then((mensa) => (this.mensa = mensa))
-        .catch((err) => console.log(err.message()));
-      /*add canteens to the Database */
-      db.collection("canteens").add(can2);
+    const can = fetch("https://openmensa.org/api/v2/canteens?page=1")
+      .then((res) => res.json())
+      .then((mensa) => (this.mensa = mensa))
+      .catch((err) => console.log(err.message()));
+    /*add canteens to the Database */
+    db.collection("canteens").add(can);
 
-      const can3 = fetch("https://openmensa.org/api/v2/canteens?page=3")
-        .then((res) => res.json())
-        .then((mensa) => (this.mensa = mensa))
-        .catch((err) => console.log(err.message()));
-      /*add canteens to the Database */
-      db.collection("canteens").add(can3);
-    }
+    const can2 = fetch("https://openmensa.org/api/v2/canteens?page=2")
+      .then((res) => res.json())
+      .then((mensa) => (this.mensa = mensa))
+      .catch((err) => console.log(err.message()));
+    /*add canteens to the Database */
+    db.collection("canteens").add(can2);
+
+    const can3 = fetch("https://openmensa.org/api/v2/canteens?page=3")
+      .then((res) => res.json())
+      .then((mensa) => (this.mensa = mensa))
+      .catch((err) => console.log(err.message()));
+    /*add canteens to the Database */
+    db.collection("canteens").add(can3);
   },
   methods: {
     async setup() {
