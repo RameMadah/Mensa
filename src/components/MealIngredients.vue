@@ -360,19 +360,18 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
-
   .br:hover {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.5);
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
   }
   .br:active {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.5);
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     border-color: white;
   }
@@ -380,7 +379,7 @@ export default {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.5);
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     border-color: white;
   }
@@ -388,7 +387,7 @@ export default {
     color: #56973e;
     background-color: white;
     box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.5);
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     border-color: white;
   }
