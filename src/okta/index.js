@@ -5,7 +5,7 @@ console.log(base);
 const oktaSignIn = new OktaSignIn({
   baseUrl: "https://dev-63755581.okta.com",
   clientId: "0oa5p9uwfkVNHh56f5d7",
-  redirectUri: "http://localhost:8080/login/callback",
+  redirectUri: "https://unirest.herokuapp.com/login/callback",
   authParams: {
     pkce: true,
     issuer: "https://dev-63755581.okta.com/oauth2/aus5pcrczerRO3PG25d7",

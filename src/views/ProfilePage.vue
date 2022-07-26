@@ -13,7 +13,7 @@
     <table class="ui table">
       <thead>
         <tr>
-          <th>Names}</th>
+          <th>Names</th>
           <th>prices</th>
         </tr>
         <tr v-for="like in likes" :key="like.id">
