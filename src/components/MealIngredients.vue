@@ -5,18 +5,17 @@
     <p class="h">{{ gmensa.city }}</p>
     <p class="h">{{ gmensa.address }}</p>
   </div>
-
   <div class="element">
     <p class="weeklymeal">Speiseplan der Woche :</p>
     <div class="Hlayout">
-      <button class="Mon" @click="mealOfDay('5')">Montag</button>
-      <button class="dien" @click="mealOfDay('6')">Dienstag</button>
-      <button class="Mittw" @click="mealOfDay('7')">Mittwoch</button>
+      <button id="d" class="Mon" @click="mealOfDay('5')">Montag</button>
+      <button id="d" class="dien" @click="mealOfDay('6')">Dienstag</button>
+      <button id="d" class="Mittw" @click="mealOfDay('7')">Mittwoch</button>
     </div>
     <div class="H2layout">
-      <button class="Donner" @click="mealOfDay('8')">Donnerstag</button>
-      <button class="Frei" @click="mealOfDay('9')">Freitag</button>
-      <button class="Sams" @click="mealOfDay('1')">Samstag</button>
+      <button id="d" class="Donner" @click="mealOfDay('8')">Donnerstag</button>
+      <button id="d" class="Frei" @click="mealOfDay('9')">Freitag</button>
+      <button id="d" class="Sams" @click="mealOfDay('1')">Samstag</button>
     </div>
     <div class="text">Den Tag besondere Rezepte :</div>
   </div>
@@ -245,6 +244,17 @@ export default {
   },
   methods: {
     async addMeal(mealid) {
+      /* Notification Stelle  */
+
+      this.$toast.success(
+        "Dieses Gericht wurde in die Liste der Lieblingsgerichte hinzugefügt.",
+        {
+          // override the global option
+          position: "bottom",
+        }
+      );
+      setTimeout(this.$toast.clear, 9000000);
+      /***********************/
       const likedMeal = await fetch(
         "https://openmensa.org/api/v2/canteens/" +
           this.mid +
@@ -257,7 +267,6 @@ export default {
         .then((li) => (this.like = li))
         .catch((err) => console.log(err));
       this.likes.push(this.like);
-      console.log(likedMeal);
       db.collection("meals").add(likedMeal);
     },
     async saveThis(id) {
@@ -360,6 +369,37 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  #FirebugUI {
+    display: grid;
+    height: 150px;
+    position: absolute;
+    background-color: #56973e;
+    top: 60px;
+    left: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(24, 28, 22, 0.1),
+      3px 3px 4px rgba(122, 194, 80, 0.4);
+    align-items: center;
+    -webkit-animation-duration: 150ms;
+    animation-duration: 150ms;
+    margin: 0.5em 0;
+    pointer-events: auto;
+    color: #fff;
+    min-height: 3em;
+    cursor: pointer;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    padding: 0.5em 2em;
+    word-break: break-word;
+    width: 30%;
+  }
+  #d {
+    border: 3px solid rgb(116 171 96);
+    margin-left: -8%;
+    width: 45%;
+    font-size: 13px;
+    padding-left: 5%;
+  }
+
   .like:hover {
     color: #56973e;
     background-color: white;
@@ -608,7 +648,7 @@ export default {
     flex-direction: row;
     align-items: flex-start;
     padding: 0px;
-    gap: 5px;
+    gap: 11%;
     position: absolute;
     width: 200px;
     height: 93px;
@@ -622,7 +662,7 @@ export default {
     flex-direction: row;
     align-items: flex-start;
     padding: 0px;
-    gap: 5px;
+    gap: 11%;
     position: absolute;
     width: 200px;
     height: 93px;
@@ -1042,6 +1082,55 @@ export default {
 /* For Mobile */
 /* For Mobile */
 @media screen and (min-width: 321px) {
+  .like:hover {
+    color: #56973e;
+    background-color: white;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+  }
+  .like:active {
+    color: #56973e;
+    background-color: white;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border-color: white;
+  }
+  .like:active:focus {
+    color: #56973e;
+    background-color: white;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border-color: white;
+  }
+  .like:focus {
+    color: #56973e;
+    background-color: white;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6),
+      -9px -9px 16px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border-color: white;
+  }
+  .like {
+    z-index: 4;
+    -webkit-box-align: start;
+    margin: 0px 1px 10px 3px;
+    top: 90px;
+    padding: 0.1rem 1rem;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    color: White;
+    transition-duration: 0.4s;
+    background-color: #56973e;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
+    align-items: start;
+    justify-content: center;
+  }
   .t {
     font-family: "Roboto", sans-serif;
     font-size: 12px;

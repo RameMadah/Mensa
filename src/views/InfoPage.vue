@@ -9,11 +9,25 @@
       <img class="logoh" src="@/assets/HTW.png" alt="logo" />
       <div class="appintro">Mensen Übersicht</div>
     </div>
+    <GMapMap class="mapDiv" :center="center" :zoom="7" map-type-id="terrain">
+      <GMapCluster>
+        <GMapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="true"
+          :draggable="true"
+          @click="center = m.position"
+        />
+      </GMapCluster>
+    </GMapMap>
     <div class="sicht" v-for="canti in canteen" :key="canti.id">
-      <a>{{ canti.name }}<br /></a>
-      <a>{{ canti.city }}<br /></a>
-      <a>{{ canti.address }}<br /></a>
-      <a>{{ canti.coordinates }}</a>
+      <a @click="googleLocation(canti.coordinates)">{{ canti.name }}<br /></a>
+      <a @click="googleLocation(canti.coordinates)">{{ canti.city }}<br /></a>
+      <a @click="googleLocation(canti.coordinates)"
+        >{{ canti.address }}<br
+      /></a>
+      <a @click="googleLocation(canti.coordinates)">{{ canti.coordinates }}</a>
       <div class="space"></div>
     </div>
   </div>
@@ -21,16 +35,41 @@
 
 <script>
 import Localbase from "localbase";
-let db = new Localbase("db");
+/*import { Loader } from "@googlemaps/js-api-loader";*/
+/*import { computed, ref } from "vue";*/
 
+let db = new Localbase("db");
+/* eslint-disable no-undef */
 export default {
   name: "InfoPage",
   data() {
     return {
       canteen: [],
+      center: { lat: 51.093048, lng: 6.84212 },
+      markers: [
+        {
+          position: {
+            lat: 51.093048,
+            lng: 6.84212,
+          },
+        }, // Along list of clusters
+      ],
     };
   },
-  methods: {},
+  methods: {
+    googleLocation(coords) {
+      console.log(coords);
+      /*const text = coords.split(",");
+      let lat = text[0].split("[");
+      console.log(lat);
+      let lng = text[1].split("]");
+      console.log(lng);
+      this.center.lat = lat[1];
+      this.center.lng = lng[0];
+      this.markers.position.lat = lat[1];
+      this.markers.position.lat = lng[0];*/
+    },
+  },
   async mounted() {
     var rk = await db
       .collection("canteens")
@@ -46,6 +85,13 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  .mapDiv {
+    z-index: 1;
+    height: 40%;
+    width: 100%;
+    padding: 5px;
+    background-color: greenyellow;
+  }
   .space {
     height: 3px;
     width: 100%;

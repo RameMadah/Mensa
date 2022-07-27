@@ -10,6 +10,7 @@
 
 <script>
 import ProfileHeader from "@/components/ProfileHeader";
+
 export default {
   name: "app",
   components: { ProfileHeader },

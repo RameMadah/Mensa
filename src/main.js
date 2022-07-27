@@ -9,8 +9,16 @@ import { oktaAuth } from "./okta";
 //import { OktaAuth } from "@okta/okta-auth-js";
 //import sampleConfig from "@/config";
 //const oktaAuth = new OktaAuth(sampleConfig.oidc);
+import Toaster from "@meforma/vue-toaster";
+import VueGoogleMaps from "@fawmi/vue-google-maps";
 
 createApp(App)
+  .use(VueGoogleMaps, {
+    load: {
+      key: "AIzaSyCzfpKuL2A3BCSPHS1-6-T0lnTTyQ_bJUs",
+    },
+  })
+  .use(Toaster)
   .use(router)
   .use(OktaVue, {
     oktaAuth,
@@ -21,5 +29,6 @@ createApp(App)
       router.push("/login");
     },
   })
+
   .mount("#app");
 //createApp(App).use(router).mount("#app");

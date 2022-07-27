@@ -10,6 +10,9 @@
         aria-expanded="false"
       >
         <img class="hmenu" src="@/assets/icon.png" alt="hmenu" />
+        <p class="userName" v-if="authState && !authState.isAuthenticated">
+          Willkomen
+        </p>
         <p class="userName" v-if="authState && authState.isAuthenticated">
           Willkomen {{ claim.name }}
         </p>
@@ -139,7 +142,7 @@ export default {
     border-radius: 10px;
   }
 }
-@media screen and (min-width: 374px) {
+@media screen and (min-width: 321px) {
   .hmenu {
     margin-left: -8px;
     margin-top: -3px;
