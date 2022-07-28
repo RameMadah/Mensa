@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style scoped>
+body {
+  background-color: #56973e;
+}
 .login {
   background-color: #56973e;
 }
@@ -35,7 +38,7 @@ export default {
   backdrop-filter: blur(7px);
   box-shadow: #2a313b;
 }
-#okta-sign-in.auth-container .button-primary {
+#okta-signin-submit {
   color: #fff;
   background: #3c7328 linear-gradient(#56973e, #8ac774) !important;
   border-color: #3c7328 #56973e #56973e !important;

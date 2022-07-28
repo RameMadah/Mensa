@@ -230,24 +230,31 @@ export default {
   .mensaback {
     background: #3e7314;
     display: flex;
+    width: 100%;
   }
   .Structure {
-    width: 320px !important;
-    height: 620px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 /* For Mobile */
 @media screen and (min-width: 321px) {
-  #Startpage {
-    width: 375px;
-    height: 620px;
-  }
   .backgroundLayout {
-    width: 375px;
+    width: 100%;
+    background-color: #3e7314;
   }
   .weiter {
     /* Auto Layout Horizontal */
     /* Auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    transition-duration: 0.4s;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -262,27 +269,18 @@ export default {
     top: 550px;
     z-index: 1;
     background: #56973e;
+    border-radius: 80px;
     border-color: #ffffff;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    font-family: "Roboto", sans-serif;
-    cursor: pointer;
-    transition: color 0.2s ease-out, transform 0.2s ease-out;
-    transition-duration: 0.4s;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
   }
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
     width: 100px;
     height: 114px;
-    left: 35%;
+    left: 110px;
     top: 330px;
 
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18.0969px;
@@ -298,13 +296,13 @@ export default {
     position: absolute;
     width: 270px;
     height: 114px;
-    left: 15%;
-    top: 390px;
+    left: 35px;
+    top: 400px;
 
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14.0969px;
+    font-size: 12.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
@@ -314,12 +312,10 @@ export default {
   .dot {
     position: fixed;
     align-content: center;
-    right: -68%;
     top: 50%;
     height: 700px;
-    width: 900px;
+    width: 100%;
     background-color: #ffffff;
-    border-radius: 50%;
     display: inline-block;
     color: #ffffff;
   }
@@ -327,11 +323,11 @@ export default {
   .appintro {
     /* Die Mensa App */
     position: absolute;
-    width: 320px;
+    width: 200px;
     height: 77px;
-    left: 20px;
+    left: 23%;
     top: 220px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 21.0969px;
@@ -345,9 +341,9 @@ export default {
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
-    width: 250px;
+    width: 230px;
     height: 100px;
-    left: 70px;
+    left: 18%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
@@ -357,7 +353,7 @@ export default {
     /* Rectangle */
 
     position: absolute;
-    width: 375px;
+    width: 320px;
     height: 10px;
     left: -272px;
     top: -24px;
@@ -367,7 +363,7 @@ export default {
     /* Rectangle 3 */
     position: absolute;
     display: flex;
-    width: 375px;
+    width: 100%;
     height: 7%;
     left: 0px;
     top: 195px;
@@ -379,10 +375,11 @@ export default {
   .mensaback {
     background: #3e7314;
     display: flex;
+    width: 100%;
   }
   .Structure {
-    width: 375px !important;
-    height: 620px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 @media screen and (min-width: 424px) {
@@ -425,7 +422,7 @@ export default {
     height: 114px;
     left: 31%;
     top: 330px;
-
+    display: none;
     font-family: "Fira Sans", sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -440,31 +437,31 @@ export default {
   .description {
     /* description */
     position: absolute;
-    width: 270px;
-    height: 114px;
-    left: 18%;
-    top: 390px;
-
-    font-family: "Fira Sans", sans-serif;
+    width: 40%;
+    height: 12%;
+    left: 30%;
+    top: 33%;
+    display: none;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 14.0969px;
+    font-size: 20.09px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
-
     color: #000000;
   }
   .dot {
     position: fixed;
     align-content: center;
-    right: -58%;
-    top: 50%;
+    top: 1%;
     height: 700px;
-    width: 900px;
+    width: 100%;
     background-color: #ffffff;
-    border-radius: 50%;
-    display: inline-block;
+    display: none;
     color: #ffffff;
   }
 
@@ -491,7 +488,7 @@ export default {
     position: absolute;
     width: 250px;
     height: 100px;
-    left: 90px;
+    left: 28%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
@@ -501,7 +498,7 @@ export default {
     /* Rectangle */
 
     position: absolute;
-    width: 375px;
+    width: 100%;
     height: 10px;
     left: -272px;
     top: -24px;
@@ -526,8 +523,8 @@ export default {
     width: 100%;
   }
   .Structure {
-    width: 375px !important;
-    height: 620px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 
@@ -585,16 +582,17 @@ export default {
   .description {
     /* description */
     position: absolute;
-    width: 290px;
-    height: 114px;
+    width: 40%;
+    height: 12%;
     left: 30%;
-    top: 390px;
+    top: 33%;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255, 0.4);
-    font-family: "Fira Sans", sans-serif;
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16.0969px;
+    font-size: 20.09px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
@@ -604,12 +602,11 @@ export default {
   .dot {
     position: fixed;
     align-content: center;
-    right: -58%;
     top: 50%;
     height: 700px;
-    width: 900px;
+    width: 100%;
     background-color: #ffffff;
-    border-radius: 50%;
+
     display: inline-block;
     color: #ffffff;
   }
@@ -638,7 +635,7 @@ export default {
     position: absolute;
     width: 250px;
     height: 100px;
-    left: 280px;
+    left: 36%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
@@ -695,7 +692,7 @@ export default {
     width: 50%;
     height: 7%;
     left: 25%;
-    top: 550px;
+    top: 90%;
     z-index: 1;
     background: #56973e;
     border-color: #ffffff;
@@ -717,7 +714,7 @@ export default {
     height: 114px;
     left: 41%;
     top: 330px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-size: 24.0969px;
     line-height: 20px;
@@ -731,16 +728,17 @@ export default {
   .description {
     /* description */
     position: absolute;
-    width: 290px;
-    height: 114px;
-    left: 35%;
-    top: 390px;
+    width: 40%;
+    height: 12%;
+    left: 30%;
+    top: 33%;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255, 0.4);
-    font-family: "Fira Sans", sans-serif;
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 10px;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16.0969px;
+    font-size: 20.09px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
@@ -750,12 +748,10 @@ export default {
   .dot {
     position: fixed;
     align-content: center;
-    right: -58%;
     top: 50%;
     height: 700px;
-    width: 900px;
+    width: 100%;
     background-color: #ffffff;
-    border-radius: 50%;
     display: inline-block;
     color: #ffffff;
   }
@@ -768,7 +764,7 @@ export default {
     height: 77px;
     left: 50px;
     top: 220px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 21.0969px;
@@ -782,9 +778,9 @@ export default {
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
-    width: 250px;
-    height: 100px;
-    left: 380px;
+    width: 20%;
+    height: 10%;
+    left: 40%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));

@@ -143,10 +143,26 @@ export default {
   }
 }
 @media screen and (min-width: 321px) {
+  .userName {
+    color: black;
+    position: absolute;
+    left: 60px;
+    top: 2px;
+  }
+  .dropdown-toggle::after {
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+    display: none;
+  }
   .hmenu {
+    z-index: 5;
+    margin-top: -4px;
     margin-left: -8px;
-    margin-top: -3px;
-    z-index: 3;
     height: 30px;
     width: 30px;
   }
@@ -156,13 +172,14 @@ export default {
     background-color: #56973e;
     border-radius: 50px;
     position: absolute;
-    top: -3px;
+    top: 3px;
     left: 5%;
     width: 40px;
     height: 37px;
+    z-index: 8;
   }
   .dropdown {
-    z-index: 5;
+    z-index: 1;
     color: #56973e;
   }
 
