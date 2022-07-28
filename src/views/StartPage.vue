@@ -1,4 +1,5 @@
 <template>
+  <div class="space_XL"></div>
   <div class="Structure">
     <router-link to="/HomePage">
       <router-link to="/login" v-if="authState && !authState.isAuthenticated"
@@ -10,7 +11,7 @@
     >
 
     <div class="mensaback">
-      <div class="htw">hi</div>
+      <div class="htw"></div>
       <div class="htwback"></div>
       <img class="backgroundLayout" src="@/assets/pngwing.com.png" alt="logo" />
       <div>
@@ -21,7 +22,7 @@
         <div class="description">
           Unsere Mensen bieten werktags frisch zubereitete Speisen, einen
           Aktionsstand sowie belegte Brötchen, Kuchen, Kalt- und Heißgetränke am
-          Backshop. Schaut doch einfach mal rein! :
+          Backshop. Schaut doch einfach mal rein!
         </div>
       </div>
       <div class="appintro">Die Mensen Platform</div>
@@ -89,10 +90,6 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
-  #Startpage {
-    width: 320px;
-    height: 620px;
-  }
   .backgroundLayout {
     max-width: 100%;
   }
@@ -143,7 +140,6 @@ export default {
 
     color: #000000;
   }
-
   .description {
     /* description */
     position: absolute;
@@ -174,7 +170,6 @@ export default {
     display: inline-block;
     color: #ffffff;
   }
-
   .appintro {
     /* Die Mensa App */
     position: absolute;
@@ -192,7 +187,6 @@ export default {
     letter-spacing: -0.597208px;
     color: #ffffff;
   }
-
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
@@ -203,7 +197,6 @@ export default {
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
   }
-
   .htw {
     /* Rectangle */
 
@@ -213,7 +206,6 @@ export default {
     left: -272px;
     top: -24px;
   }
-
   .htwback {
     /* Rectangle 3 */
     position: absolute;
@@ -226,7 +218,6 @@ export default {
     margin: 0px;
     background: rgba(145, 255, 5, 0.34);
   }
-
   .mensaback {
     background: #3e7314;
     display: flex;
@@ -237,10 +228,18 @@ export default {
     height: 100% !important;
   }
 }
+
 /* For Mobile */
 @media screen and (min-width: 321px) {
+  .space_XL {
+    display: block;
+    background-color: #56973e;
+    height: 300px;
+    z-index: -5;
+  }
   .backgroundLayout {
     width: 100%;
+    display: none;
     background-color: #3e7314;
   }
   .weiter {
@@ -277,7 +276,7 @@ export default {
     position: absolute;
     width: 100px;
     height: 114px;
-    left: 110px;
+    left: 35%;
     top: 330px;
 
     font-family: "Roboto", sans-serif;
@@ -290,13 +289,12 @@ export default {
 
     color: #000000;
   }
-
   .description {
     /* description */
     position: absolute;
     width: 270px;
     height: 114px;
-    left: 35px;
+    left: 12%;
     top: 400px;
 
     font-family: "Roboto", sans-serif;
@@ -319,7 +317,6 @@ export default {
     display: inline-block;
     color: #ffffff;
   }
-
   .appintro {
     /* Die Mensa App */
     position: absolute;
@@ -337,7 +334,6 @@ export default {
     letter-spacing: -0.597208px;
     color: #ffffff;
   }
-
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
@@ -348,7 +344,6 @@ export default {
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
   }
-
   .htw {
     /* Rectangle */
 
@@ -358,7 +353,6 @@ export default {
     left: -272px;
     top: -24px;
   }
-
   .htwback {
     /* Rectangle 3 */
     position: absolute;
@@ -371,7 +365,6 @@ export default {
     margin: 0px;
     background: rgba(145, 255, 5, 0.34);
   }
-
   .mensaback {
     background: #3e7314;
     display: flex;
@@ -382,13 +375,32 @@ export default {
     height: 100% !important;
   }
 }
+
+/* For Tab */
 @media screen and (min-width: 424px) {
+  .space_XL {
+    display: block;
+    background-color: #56973e;
+    height: 300px;
+    z-index: -5;
+  }
   .backgroundLayout {
     width: 100%;
+    display: none;
+    background-color: #3e7314;
   }
   .weiter {
     /* Auto Layout Horizontal */
     /* Auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    transition-duration: 0.4s;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -403,27 +415,18 @@ export default {
     top: 550px;
     z-index: 1;
     background: #56973e;
+    border-radius: 80px;
     border-color: #ffffff;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    font-family: "Roboto", sans-serif;
-    cursor: pointer;
-    transition: color 0.2s ease-out, transform 0.2s ease-out;
-    transition-duration: 0.4s;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
   }
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
-    width: 150px;
+    width: 100px;
     height: 114px;
-    left: 31%;
+    left: 41%;
     top: 330px;
-    display: none;
-    font-family: "Fira Sans", sans-serif;
+
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18.0969px;
@@ -433,46 +436,42 @@ export default {
 
     color: #000000;
   }
-
   .description {
     /* description */
     position: absolute;
-    width: 40%;
-    height: 12%;
+    width: 270px;
+    height: 114px;
     left: 30%;
-    top: 33%;
-    display: none;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255, 0.8);
-    padding: 10px;
+    top: 400px;
+
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20.09px;
+    font-size: 12.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
+
     color: #000000;
   }
   .dot {
     position: fixed;
     align-content: center;
-    top: 1%;
+    top: 50%;
     height: 700px;
     width: 100%;
     background-color: #ffffff;
-    display: none;
+    display: inline-block;
     color: #ffffff;
   }
-
   .appintro {
     /* Die Mensa App */
     position: absolute;
-    width: 320px;
+    width: 200px;
     height: 77px;
-    left: 50px;
+    left: 34%;
     top: 220px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 21.0969px;
@@ -482,28 +481,25 @@ export default {
     letter-spacing: -0.597208px;
     color: #ffffff;
   }
-
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
-    width: 250px;
+    width: 230px;
     height: 100px;
-    left: 28%;
+    left: 33%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
   }
-
   .htw {
     /* Rectangle */
 
     position: absolute;
-    width: 100%;
+    width: 320px;
     height: 10px;
     left: -272px;
     top: -24px;
   }
-
   .htwback {
     /* Rectangle 3 */
     position: absolute;
@@ -516,10 +512,9 @@ export default {
     margin: 0px;
     background: rgba(145, 255, 5, 0.34);
   }
-
   .mensaback {
-    position: absolute;
     background: #3e7314;
+    display: flex;
     width: 100%;
   }
   .Structure {
@@ -527,14 +522,30 @@ export default {
     height: 100% !important;
   }
 }
-
 @media screen and (min-width: 767px) {
+  .space_XL {
+    display: block;
+    background-color: #56973e;
+    height: 300px;
+    z-index: -5;
+  }
   .backgroundLayout {
     width: 100%;
+    display: none;
+    background-color: #3e7314;
   }
   .weiter {
     /* Auto Layout Horizontal */
     /* Auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    transition-duration: 0.4s;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -549,50 +560,39 @@ export default {
     top: 550px;
     z-index: 1;
     background: #56973e;
+    border-radius: 80px;
     border-color: #ffffff;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    font-family: "Roboto", sans-serif;
-    cursor: pointer;
-    transition: color 0.2s ease-out, transform 0.2s ease-out;
-    transition-duration: 0.4s;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
   }
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
-    width: 190px;
+    width: 100px;
     height: 114px;
-    left: 41%;
+    left: 45%;
     top: 330px;
-    font-family: "Fira Sans", sans-serif;
+
+    font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-size: 24.0969px;
+    font-weight: 400;
+    font-size: 18.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
 
-    color: white;
-    font-weight: 555;
+    color: #000000;
   }
-
   .description {
     /* description */
     position: absolute;
-    width: 40%;
-    height: 12%;
-    left: 30%;
-    top: 33%;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255, 0.8);
-    padding: 10px;
+    width: 270px;
+    height: 114px;
+    left: 35%;
+    top: 400px;
+
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20.09px;
+    font-size: 12.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
@@ -606,20 +606,17 @@ export default {
     height: 700px;
     width: 100%;
     background-color: #ffffff;
-
     display: inline-block;
     color: #ffffff;
   }
-
   .appintro {
     /* Die Mensa App */
-    display: none;
     position: absolute;
-    width: 320px;
+    width: 200px;
     height: 77px;
-    left: 50px;
+    left: 39%;
     top: 220px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 21.0969px;
@@ -629,28 +626,25 @@ export default {
     letter-spacing: -0.597208px;
     color: #ffffff;
   }
-
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
-    width: 250px;
+    width: 230px;
     height: 100px;
-    left: 36%;
+    left: 37%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
   }
-
   .htw {
     /* Rectangle */
 
     position: absolute;
-    width: 375px;
+    width: 320px;
     height: 10px;
     left: -272px;
     top: -24px;
   }
-
   .htwback {
     /* Rectangle 3 */
     position: absolute;
@@ -663,24 +657,40 @@ export default {
     margin: 0px;
     background: rgba(145, 255, 5, 0.34);
   }
-
   .mensaback {
-    position: absolute;
     background: #3e7314;
+    display: flex;
     width: 100%;
   }
   .Structure {
-    width: 375px !important;
-    height: 620px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 @media screen and (min-width: 1023px) {
+  .space_XL {
+    display: block;
+    background-color: #56973e;
+    height: 300px;
+    z-index: -5;
+  }
   .backgroundLayout {
     width: 100%;
+    display: none;
+    background-color: #3e7314;
   }
   .weiter {
     /* Auto Layout Horizontal */
     /* Auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    transition-duration: 0.4s;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -692,53 +702,42 @@ export default {
     width: 50%;
     height: 7%;
     left: 25%;
-    top: 90%;
+    top: 550px;
     z-index: 1;
     background: #56973e;
+    border-radius: 80px;
     border-color: #ffffff;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    font-family: "Roboto", sans-serif;
-    cursor: pointer;
-    transition: color 0.2s ease-out, transform 0.2s ease-out;
-    transition-duration: 0.4s;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    box-shadow: 4px 4px 6px 0 rgb(0 0 0 / 10%);
   }
   .subtitle {
     /* Mensa HTW Treskowallee */
     position: absolute;
-    width: 190px;
+    width: 100px;
     height: 114px;
-    left: 41%;
+    left: 45%;
     top: 330px;
+
     font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-size: 24.0969px;
+    font-weight: 400;
+    font-size: 18.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
 
-    color: white;
-    font-weight: 555;
+    color: #000000;
   }
-
   .description {
     /* description */
     position: absolute;
-    width: 40%;
-    height: 12%;
-    left: 30%;
-    top: 33%;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255, 0.8);
-    padding: 10px;
+    width: 570px;
+    height: 114px;
+    left: 27%;
+    top: 400px;
+
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 20.09px;
+    font-size: 18.0969px;
     line-height: 20px;
     text-align: center;
     letter-spacing: -0.597208px;
@@ -755,14 +754,12 @@ export default {
     display: inline-block;
     color: #ffffff;
   }
-
   .appintro {
     /* Die Mensa App */
-    display: none;
     position: absolute;
-    width: 320px;
+    width: 200px;
     height: 77px;
-    left: 50px;
+    left: 41%;
     top: 220px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
@@ -774,28 +771,25 @@ export default {
     letter-spacing: -0.597208px;
     color: #ffffff;
   }
-
   .logoh {
     /* Logo_HTW_Berlin 2 */
     position: absolute;
-    width: 20%;
-    height: 10%;
+    width: 230px;
+    height: 100px;
     left: 40%;
     top: 109px;
     mix-blend-mode: normal;
     filter: drop-shadow(0px 1px 1px rgba(0, 0, 0.7, 0.7));
   }
-
   .htw {
     /* Rectangle */
 
     position: absolute;
-    width: 375px;
+    width: 320px;
     height: 10px;
     left: -272px;
     top: -24px;
   }
-
   .htwback {
     /* Rectangle 3 */
     position: absolute;
@@ -808,15 +802,14 @@ export default {
     margin: 0px;
     background: rgba(145, 255, 5, 0.34);
   }
-
   .mensaback {
-    position: absolute;
     background: #3e7314;
+    display: flex;
     width: 100%;
   }
   .Structure {
-    width: 375px !important;
-    height: 620px !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 </style>

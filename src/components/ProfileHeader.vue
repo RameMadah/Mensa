@@ -147,7 +147,7 @@ export default {
     color: black;
     position: absolute;
     left: 60px;
-    top: 2px;
+    top: 8px;
   }
   .dropdown-toggle::after {
     margin-left: 0.255em;
@@ -166,7 +166,6 @@ export default {
     height: 30px;
     width: 30px;
   }
-
   #dropdownMenuLink {
     color: white;
     background-color: #56973e;
@@ -182,7 +181,6 @@ export default {
     z-index: 1;
     color: #56973e;
   }
-
   .block {
     z-index: 1;
     width: 90%;
@@ -192,7 +190,6 @@ export default {
       3px 3px 4px rgba(22, 22, 80, 0.4);
     position: absolute;
     display: block;
-    left: 9px;
     right: 5%;
     top: 10px;
     border-radius: 10px;

@@ -1,8 +1,6 @@
 <template>
   <profile-header class="ham"></profile-header>
-  <div class="homepage">
-    <meal-ingredients></meal-ingredients>
-  </div>
+  <meal-ingredients></meal-ingredients>
 </template>
 
 <script>
@@ -20,9 +18,5 @@ export default {
 <style scoped>
 .ham {
   z-index: 6;
-}
-.homepage {
-  width: 320px;
-  height: 620px;
 }
 </style>
