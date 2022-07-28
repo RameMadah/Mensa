@@ -1,24 +1,24 @@
 <template>
   <div class="space"></div>
+  <div class="coulmns"></div>
   <div class="profile">
     <h1 class="ui header">
       <i aria-hidden="true" class="drivers license outline icon"> </i>
-      My User Profile (ID Token Claims)
+      Der Benutzer Profil
     </h1>
     <p>
-      This route is protected with the <code>onAuthRequired</code>, navigation
-      guard which will ensure that this page cannot be accessed until you have
-      authenticated.
+      Hier können Sie Ihre <code>Lieblingsgerichte </code> mit den Preisen
+      anschauen
     </p>
     <table class="ui table">
       <thead>
-        <tr>
+        <tr class="coulmns">
           <th>Names</th>
           <th>prices</th>
         </tr>
         <tr v-for="like in likes" :key="like.id">
           <th>{{ like.name }}</th>
-          <th>{{ like.prices }}</th>
+          <th>{{ like.prices.students }}</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -58,5 +58,8 @@ export default {
 <style scoped>
 .space {
   height: 60px;
+}
+.coulmns {
+  background-color: #56973e;
 }
 </style>

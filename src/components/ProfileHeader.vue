@@ -44,7 +44,7 @@
             class="dropdown-item"
             to="/login"
             v-if="authState && !authState.isAuthenticated"
-            ><button>Login</button></router-link
+            ><button class="lb">Login</button></router-link
           >
         </li>
         <li>
@@ -87,6 +87,13 @@ export default {
 <style scoped>
 /* For Mobile */
 @media screen and (max-width: 320px) {
+  .lb {
+    background-color: greenyellow;
+    border-radius: 10px;
+    border-color: white;
+    width: 60%;
+    box-shadow: 0px 0px white;
+  }
   .userName {
     color: black;
     position: absolute;
@@ -143,6 +150,13 @@ export default {
   }
 }
 @media screen and (min-width: 321px) {
+  .lb {
+    background-color: greenyellow;
+    border-radius: 10px;
+    border-color: white;
+    width: 60%;
+    box-shadow: 0px 0px white;
+  }
   .userName {
     color: black;
     position: absolute;

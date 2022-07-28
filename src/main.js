@@ -11,6 +11,7 @@ import { oktaAuth } from "./okta";
 //const oktaAuth = new OktaAuth(sampleConfig.oidc);
 import Toaster from "@meforma/vue-toaster";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
+import NwImg from "nw-img-vue";
 
 createApp(App)
   .use(VueGoogleMaps, {
@@ -18,6 +19,7 @@ createApp(App)
       key: "AIzaSyCzfpKuL2A3BCSPHS1-6-T0lnTTyQ_bJUs",
     },
   })
+  .use(NwImg)
   .use(Toaster)
   .use(router)
   .use(OktaVue, {
