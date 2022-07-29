@@ -150,7 +150,7 @@ export default {
     position: absolute;
     width: 200px;
     height: 27px;
-    left: 29%;
+    left: 20%;
     top: 220px;
     font-family: "Roboto", sans-serif;
     font-style: normal;
